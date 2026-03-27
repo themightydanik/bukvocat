@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>БуквоКот</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ======== PROFILE SETUP SCREEN ======== -->
+<div class="screen active" id="screen-profile">
+  <div style="font-size:64px;margin-top:24px;">🐱</div>
+  <div class="profile-title" id="profileTitle">Привет! Я БуквоКот!</div>
+  <div class="profile-subtitle" id="profileSubtitle">Расскажи мне о себе</div>
+  <div class="profile-form">
+    <div class="form-group">
+      <label class="form-label" id="labelName">Имя ребёнка</label>
+      <input class="form-input" id="inputName" type="text" placeholder="Например: Саша" maxlength="20">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" id="labelAge">Возраст</label>
+        <input class="form-input" id="inputAge" type="number" placeholder="5" min="3" max="8">
+      </div>
+      <div class="form-group">
+        <label class="form-label" id="labelBirthday">День рождения</label>
+        <input class="form-input" id="inputBirthday" type="date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" id="labelCity">Город <span class="form-optional">(необязательно)</span></label>
+      <input class="form-input" id="inputCity" type="text" placeholder="Киев" maxlength="30">
+    </div>
+    <div class="lang-bar" style="align-self:center;padding:0;margin-top:4px;">
+      <button class="lang-btn active" onclick="setLang('ru')">🇷🇺 RU</button>
+      <button class="lang-btn" onclick="setLang('uk')">🇺🇦 UK</button>
+      <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+    <button class="btn btn-primary" id="btnStartProfile" onclick="saveProfile()" style="margin-top:4px;">
+      Поехали! 🚀
+    </button>
+  </div>
+</div>
+
+<!-- ======== MENU SCREEN ======== -->
+<div class="screen" id="screen-menu">
+  <div class="menu-header">
+    <svg class="menu-avatar" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="mg-body" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFAD5C"/><stop offset="100%" stop-color="#E07820"/></radialGradient>
+        <radialGradient id="mg-head" cx="45%" cy="38%" r="55%"><stop offset="0%" stop-color="#FFB86A"/><stop offset="100%" stop-color="#D97318"/></radialGradient>
+        <radialGradient id="mg-belly" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFF0DC"/><stop offset="100%" stop-color="#F5D5A0"/></radialGradient>
+        <radialGradient id="mg-eye" cx="35%" cy="30%" r="60%"><stop offset="0%" stop-color="#A8E063"/><stop offset="60%" stop-color="#56ab2f"/><stop offset="100%" stop-color="#2d6a0a"/></radialGradient>
+      </defs>
+      <path d="M145 185 Q185 175 188 148 Q190 125 172 118 Q158 113 155 128 Q165 132 163 150 Q161 168 140 175 Z" fill="url(#mg-body)"/>
+      <ellipse cx="144" cy="177" rx="10" ry="6" fill="#FFF0DC" transform="rotate(-10 144 177)"/>
+      <ellipse cx="100" cy="158" rx="52" ry="40" fill="url(#mg-body)"/>
+      <ellipse cx="98" cy="163" rx="30" ry="22" fill="url(#mg-belly)"/>
+      <ellipse cx="100" cy="122" rx="28" ry="14" fill="url(#mg-body)"/>
+      <ellipse cx="100" cy="88" rx="50" ry="47" fill="url(#mg-head)"/>
+      <polygon points="58,60 40,18 82,48" fill="#D97318"/><polygon points="60,60 46,26 78,50" fill="#E8748C"/>
+      <polygon points="142,60 160,18 118,48" fill="#D97318"/><polygon points="140,60 154,26 122,50" fill="#E8748C"/>
+      <ellipse cx="100" cy="108" rx="30" ry="25" fill="url(#mg-belly)"/>
+      <ellipse cx="83" cy="85" rx="13" ry="14" fill="white"/><ellipse cx="117" cy="85" rx="13" ry="14" fill="white"/>
+      <ellipse cx="83" cy="86" rx="9" ry="10" fill="url(#mg-eye)"/><ellipse cx="117" cy="86" rx="9" ry="10" fill="url(#mg-eye)"/>
+      <ellipse cx="83" cy="86" rx="4" ry="8" fill="#111" opacity="0.9"/><ellipse cx="117" cy="86" rx="4" ry="8" fill="#111" opacity="0.9"/>
+      <ellipse cx="86" cy="81" rx="3.5" ry="4" fill="white" opacity="0.85"/><ellipse cx="120" cy="81" rx="3.5" ry="4" fill="white" opacity="0.85"/>
+      <path d="M96 107 L100 103 L104 107 Q100 112 96 107Z" fill="#FF7F9E"/>
+      <line x1="100" y1="107" x2="100" y2="112" stroke="#d06080" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M93 112 Q100 120 107 112" stroke="#d06080" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <line x1="104" y1="107" x2="134" y2="101" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+      <line x1="104" y1="110" x2="134" y2="110" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+      <line x1="96" y1="107" x2="66" y2="101" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+      <line x1="96" y1="110" x2="66" y2="110" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+      <ellipse cx="70" cy="101" rx="9" ry="6" fill="#FFB3C6" opacity="0.45"/>
+      <ellipse cx="130" cy="101" rx="9" ry="6" fill="#FFB3C6" opacity="0.45"/>
+      <ellipse cx="74" cy="188" rx="18" ry="11" fill="url(#mg-body)"/><ellipse cx="126" cy="188" rx="18" ry="11" fill="url(#mg-body)"/>
+      <ellipse cx="74" cy="190" rx="11" ry="6" fill="#F5D5A0"/><ellipse cx="126" cy="190" rx="11" ry="6" fill="#F5D5A0"/>
+    </svg>
+    <div class="menu-greeting">
+      <div class="menu-name" id="menuGreeting">Привет!</div>
+      <div class="menu-date" id="menuDate"></div>
+    </div>
+    <div class="streak-badge" id="streakBadge">🔥 1</div>
+  </div>
+
+  <!-- Daily progress -->
+  <div class="daily-card">
+    <div class="daily-stars" id="dailyStars">
+      <div class="daily-star" id="dstar0">⭐</div>
+      <div class="daily-star" id="dstar1">⭐</div>
+      <div class="daily-star" id="dstar2">⭐</div>
+    </div>
+    <div class="daily-text">
+      <div class="daily-label" id="dailyLabel">Сегодняшний прогресс</div>
+      <div class="daily-sub" id="dailySub">Пройди игру, чтобы заработать звезду!</div>
+    </div>
+  </div>
+
+  <div class="lang-bar" style="align-self:flex-end; padding-right:16px;">
+    <button class="lang-btn" id="mlang-ru" onclick="setLang('ru')">🇷🇺</button>
+    <button class="lang-btn" id="mlang-uk" onclick="setLang('uk')">🇺🇦</button>
+    <button class="lang-btn" id="mlang-en" onclick="setLang('en')">🇬🇧</button>
+  </div>
+
+  <div class="section-title" id="menuSectionGames">🎮 Игры</div>
+  <div class="games-grid">
+    <div class="game-card" onclick="startGame('letter')" id="card-letter">
+      <div class="game-emoji">👂</div>
+      <div class="game-name" id="gcardName0">Какая буква?</div>
+      <div class="game-best" id="gcardBest0">Лучший: —</div>
+    </div>
+    <div class="game-card" onclick="startGame('syllable')" id="card-syllable">
+      <div class="game-emoji">🧩</div>
+      <div class="game-name" id="gcardName1">Слоги</div>
+      <div class="game-best" id="gcardBest1">Лучший: —</div>
+    </div>
+    <div class="game-card locked" id="card-word">
+      <div class="game-emoji">🚂</div>
+      <div class="game-name" id="gcardName2">Слова</div>
+      <div class="game-lock">🔒</div>
+    </div>
+    <div class="game-card locked" id="card-memory">
+      <div class="game-emoji">🃏</div>
+      <div class="game-name" id="gcardName3">Мемори</div>
+      <div class="game-lock">🔒</div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn active" onclick="goMenu()"><span class="nav-icon">🏠</span><span id="navHome">Главная</span></button>
+    <button class="nav-btn" onclick="goGallery()"><span class="nav-icon">🏆</span><span id="navGallery">Наклейки</span></button>
+    <button class="nav-btn" onclick="goSettings()"><span class="nav-icon">⚙️</span><span id="navSettings">Настройки</span></button>
+  </div>
+</div>
+
+<!-- ======== GAME SCREEN ======== -->
+<div class="screen" id="screen-game">
+  <div class="game-header">
+    <button class="back-btn" onclick="goMenu()">←</button>
+    <div class="score-badge">⭐ <span id="gameScore">0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="q-counter" id="qCounter">1/8</div>
+  </div>
+
+  <div class="cat-section">
+    <div class="speech-bubble" id="speechBubble">...</div>
+    <div class="cat-wrap">
+      <svg class="cat-svg" id="catSvg" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="cg-body" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFAD5C"/><stop offset="100%" stop-color="#E07820"/></radialGradient>
+          <radialGradient id="cg-head" cx="45%" cy="38%" r="55%"><stop offset="0%" stop-color="#FFB86A"/><stop offset="100%" stop-color="#D97318"/></radialGradient>
+          <radialGradient id="cg-belly" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFF0DC"/><stop offset="100%" stop-color="#F5D5A0"/></radialGradient>
+          <radialGradient id="cg-eye" cx="35%" cy="30%" r="60%"><stop offset="0%" stop-color="#A8E063"/><stop offset="60%" stop-color="#56ab2f"/><stop offset="100%" stop-color="#2d6a0a"/></radialGradient>
+        </defs>
+        <path d="M145 185 Q185 175 188 148 Q190 125 172 118 Q158 113 155 128 Q165 132 163 150 Q161 168 140 175 Z" fill="url(#cg-body)"/>
+        <path d="M175 128 Q180 138 177 148" stroke="#C05E10" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <ellipse cx="144" cy="177" rx="10" ry="6" fill="#FFF0DC" transform="rotate(-10 144 177)"/>
+        <ellipse cx="100" cy="158" rx="52" ry="40" fill="url(#cg-body)"/>
+        <path d="M72 140 Q76 155 74 168" stroke="#C05E10" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+        <ellipse cx="98" cy="163" rx="30" ry="22" fill="url(#cg-belly)"/>
+        <ellipse cx="100" cy="122" rx="28" ry="14" fill="url(#cg-body)"/>
+        <ellipse cx="100" cy="88" rx="50" ry="47" fill="url(#cg-head)"/>
+        <polygon points="58,60 40,18 82,48" fill="#D97318"/><polygon points="60,60 46,26 78,50" fill="#E8748C"/><polygon points="60,58 50,30 74,50" fill="#F08090" opacity="0.6"/>
+        <polygon points="142,60 160,18 118,48" fill="#D97318"/><polygon points="140,60 154,26 122,50" fill="#E8748C"/><polygon points="140,58 150,30 126,50" fill="#F08090" opacity="0.6"/>
+        <path d="M88 55 Q92 48 96 55" stroke="#C05E10" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M104 55 Q108 48 112 55" stroke="#C05E10" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <ellipse cx="100" cy="108" rx="30" ry="25" fill="url(#cg-belly)"/>
+        <ellipse cx="83" cy="85" rx="13" ry="14" fill="white"/><ellipse cx="117" cy="85" rx="13" ry="14" fill="white"/>
+        <ellipse cx="83" cy="86" rx="9" ry="10" fill="url(#cg-eye)"/><ellipse cx="117" cy="86" rx="9" ry="10" fill="url(#cg-eye)"/>
+        <ellipse cx="83" cy="86" rx="4" ry="8" fill="#111" opacity="0.9"/><ellipse cx="117" cy="86" rx="4" ry="8" fill="#111" opacity="0.9"/>
+        <ellipse cx="83" cy="85" rx="13" ry="14" fill="none" stroke="#8B4513" stroke-width="1.2" opacity="0.4"/>
+        <ellipse cx="117" cy="85" rx="13" ry="14" fill="none" stroke="#8B4513" stroke-width="1.2" opacity="0.4"/>
+        <ellipse cx="86" cy="81" rx="3.5" ry="4" fill="white" opacity="0.85"/><ellipse cx="120" cy="81" rx="3.5" ry="4" fill="white" opacity="0.85"/>
+        <circle cx="79" cy="89" r="1.5" fill="white" opacity="0.5"/><circle cx="113" cy="89" r="1.5" fill="white" opacity="0.5"/>
+        <path d="M96 107 L100 103 L104 107 Q100 112 96 107Z" fill="#FF7F9E"/>
+        <line x1="100" y1="107" x2="100" y2="112" stroke="#d06080" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M93 112 Q100 120 107 112" stroke="#d06080" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <line x1="104" y1="107" x2="138" y2="101" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="104" y1="110" x2="138" y2="110" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="104" y1="113" x2="136" y2="118" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="96" y1="107" x2="62" y2="101" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="96" y1="110" x2="62" y2="110" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="96" y1="113" x2="64" y2="118" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+        <ellipse cx="70" cy="101" rx="10" ry="7" fill="#FFB3C6" opacity="0.45"/>
+        <ellipse cx="130" cy="101" rx="10" ry="7" fill="#FFB3C6" opacity="0.45"/>
+        <ellipse cx="74" cy="188" rx="18" ry="11" fill="url(#cg-body)"/><ellipse cx="126" cy="188" rx="18" ry="11" fill="url(#cg-body)"/>
+        <ellipse cx="74" cy="190" rx="11" ry="6" fill="#F5D5A0"/><ellipse cx="126" cy="190" rx="11" ry="6" fill="#F5D5A0"/>
+        <line x1="68" y1="187" x2="68" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="74" y1="186" x2="74" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="80" y1="187" x2="80" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="120" y1="187" x2="120" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="126" y1="186" x2="126" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="132" y1="187" x2="132" y2="193" stroke="#D4A070" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="game-area" id="gameArea">
+    <!-- Sound card — replaces letter card, no visual hint -->
+    <div class="sound-card" id="soundCard" onclick="repeatSound()">
+      <div class="sound-waves" id="soundWaves">
+        <div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div>
+      </div>
+      <div class="sound-card-label" id="soundCardLabel">🔊</div>
+    </div>
+    <div class="task-label" id="taskLabel">Найди эту букву</div>
+    <div class="answers-grid" id="answersGrid"></div>
+    <button class="btn btn-primary next-btn" id="nextBtn" onclick="nextQuestion()">Дальше →</button>
+  </div>
+
+  <div class="result-screen" id="resultScreen">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <div class="result-title" id="resultTitle">Молодец!</div>
+    <div class="result-score" id="resultScoreText">⭐ 7 / 8</div>
+    <div class="sticker-earned" id="stickerEarned" style="display:none">
+      <div class="sticker-earned-icon" id="stickerEarnedIcon">⭐</div>
+      <div class="sticker-earned-text" id="stickerEarnedText">Ты заработал наклейку!</div>
+    </div>
+    <button class="btn btn-secondary" onclick="goMenu()" style="margin-top:8px;" id="btnBackMenu">В меню</button>
+  </div>
+</div>
+
+<!-- ======== GALLERY SCREEN ======== -->
+<div class="screen" id="screen-gallery">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goMenu()">←</button>
+    <div class="top-title" id="galleryTitle">Мои наклейки</div>
+  </div>
+  <div class="gallery-content">
+    <div class="stickers-grid" id="stickersGrid"></div>
+    <div class="prize-card" id="prizeCard">
+      <div class="prize-title" id="prizeTitle">🎁 Супер-приз!</div>
+      <div class="prize-desc" id="prizeDesc">Собери 3 наклейки и получи волшебную сказку про себя!</div>
+      <div class="prize-locked" id="prizeLocked">⭐ Ещё нужно: <span id="prizeNeed">3</span></div>
+      <button class="btn btn-accent" id="btnGetStory" onclick="goStory()" style="display:none; margin-top:10px; width:100%;">Получить сказку! ✨</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== STORY SCREEN ======== -->
+<div class="screen" id="screen-story">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goGallery()">←</button>
+    <div class="top-title" id="storyScreenTitle">Моя сказка</div>
+  </div>
+  <div class="story-content">
+    <div class="story-loading" id="storyLoading">
+      <div style="font-size:48px">✨</div>
+      <div style="font-size:17px;font-weight:800;color:#7e22ce;" id="storyLoadingText">Котик пишет сказку...</div>
+      <div class="loading-dots">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+      </div>
+    </div>
+    <div class="story-box" id="storyBox" style="display:none">
+      <div class="story-title" id="storyTitleText"></div>
+      <div id="storyBodyText"></div>
+    </div>
+    <button class="btn btn-accent" id="btnReadStory" onclick="readStoryAloud()" style="display:none; width:100%;">Прочитай вслух 🔊</button>
+    <button class="btn btn-secondary" id="btnNewStory" onclick="generateStory()" style="display:none; width:100%;">Новая сказка 🔄</button>
+  </div>
+</div>
+
+<!-- ======== SETTINGS SCREEN ======== -->
+<div class="screen" id="screen-settings">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goMenu()">←</button>
+    <div class="top-title" id="settingsTitle">Настройки</div>
+  </div>
+  <div class="settings-content">
+    <div class="settings-section">
+      <div class="settings-section-title" id="settingsProfileTitle">👤 Профиль</div>
+      <div class="profile-form" style="gap:10px;">
+        <div class="form-group">
+          <label class="form-label" id="sLabelName">Имя</label>
+          <input class="form-input" id="sInputName" type="text" maxlength="20">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="sLabelAge">Возраст</label>
+            <input class="form-input" id="sInputAge" type="number" min="3" max="8">
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="sLabelBirthday">День рождения</label>
+            <input class="form-input" id="sInputBirthday" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="sLabelCity">Город</label>
+          <input class="form-input" id="sInputCity" type="text" maxlength="30">
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="saveSettingsProfile()" id="btnSaveSettings">Сохранить</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">🔑 Groq API</div>
+      <div class="form-group">
+        <label class="form-label" id="sLabelApi">API-ключ для сказок</label>
+        <input class="form-input" id="sInputApi" type="password" placeholder="gsk_..." style="font-size:14px;">
+        <div class="api-key-note" id="apiKeyNote">Бесплатный ключ на console.groq.com → API Keys</div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="saveApiKey()" style="margin-top:10px;" id="btnSaveApi">Сохранить ключ</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title" id="settingsLangTitle">🌍 Язык игры</div>
+      <div class="lang-bar" style="padding:0;">
+        <button class="lang-btn" id="slang-ru" onclick="setLang('ru')">🇷🇺 RU</button>
+        <button class="lang-btn" id="slang-uk" onclick="setLang('uk')">🇺🇦 UK</button>
+        <button class="lang-btn" id="slang-en" onclick="setLang('en')">🇬🇧 EN</button>
+      </div>
+    </div>
+
+    <div class="settings-section" style="text-align:center;">
+      <button class="btn btn-sm" onclick="resetProgress()"
+        style="background:#fee2e2;border:3px solid #fca5a5;color:#b91c1c;box-shadow:0 4px 0 #fca5a5;font-size:14px;">
+        🗑️ <span id="btnResetText">Сбросить прогресс</span>
+      </button>
+    </div>
+  </div>
+</div>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/init.js"></script>
+</body>
+</html>
