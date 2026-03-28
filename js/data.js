@@ -54,6 +54,10 @@ subjectGameNames: {
   count:'Счёт', compare:'Больше/меньше',
   vocab:'Словарь', translate:'Перевод',
   },
+taskCount: 'Сколько здесь?',
+taskCompare: 'Что больше?',
+promptCount: 'Посчитай предметы!',
+promptCompare: 'Сравни числа!',
     }
   },
   uk: {
@@ -109,6 +113,10 @@ subjectGameNames: {
   count:'Лічба', compare:'Більше/менше',
   vocab:'Словник', translate:'Переклад'
 },
+taskCount: 'Скільки тут?',
+taskCompare: 'Що більше?',
+promptCount: 'Полічи предмети!',
+promptCompare: 'Порівняй числа!',
     }
   },
   en: {
@@ -163,6 +171,10 @@ subjectGameNames: {
   count:'Count', compare:'More/Less',
   vocab:'Vocab', translate:'Translate'
 },
+taskCount: 'How many?',
+taskCompare: 'Which is bigger?',
+promptCount: 'Count the objects!',
+promptCompare: 'Compare the numbers!',
     }
   }
 };
@@ -181,8 +193,8 @@ const SUBJECTS = [
   {
     key: 'math', emoji: '🔢', color: '#4ECDC4', dark: '#0f766e',
     games: [
-      { type: 'count',   emoji: '🔢', locked: true },
-      { type: 'compare', emoji: '⚖️', locked: true },
+      { type: 'count',   emoji: '🔢', locked: false },
+      { type: 'compare', emoji: '⚖️', locked: false },
     ]
   },
   {
