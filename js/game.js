@@ -1,7 +1,7 @@
 // ============================================================
 // GAME LOGIC
 // ============================================================
-const MATH_TYPES = ['count', 'compare'];
+const MATH_TYPES = ['count', 'compare', 'vocab'];
 const COUNT_EMOJIS = ['🐱','🐶','🐸','🦋','⭐','🍎','🚗','🌸','🌟','🎈'];
 
 function startGame(type) {
@@ -28,6 +28,7 @@ function startGame(type) {
   if (type === 'syllable') { prompt = L.promptSyllable; task = L.taskSyllable; }
   if (type === 'count')    { prompt = u.promptCount;    task = u.taskCount; }
   if (type === 'compare')  { prompt = u.promptCompare;  task = u.taskCompare; }
+  if (type === 'vocab')  { prompt = u.promptVocab;   task = u.taskVocab; }
 
   document.getElementById('speechBubble').textContent = prompt;
   document.getElementById('taskLabel').textContent = task;
@@ -78,6 +79,19 @@ function buildQuestions(type) {
     return result;
   }
 
+  if (type === 'vocab') {
+    const shuffled = [...VOCAB_WORDS].sort(() => Math.random() - 0.5).slice(0, TOTAL);
+    return shuffled.map(item => {
+      const wrongWords = VOCAB_WORDS.filter(w => w.en !== item.en)
+        .sort(() => Math.random() - 0.5).slice(0, 3);
+      const options = [...wrongWords, item]
+        .sort(() => Math.random() - 0.5)
+        .map(w => ({ spoken: w.en, display: w.en }));
+      const hint = lang === 'uk' ? item.uk : lang === 'en' ? item.en : item.ru;
+      return { spoken: item.en, display: item.emoji, hint, options, isVocab: true };
+    });
+  }
+
   if (type === 'syllable') {
     const pairs = L.syllables.map((s,i) => ({spoken: s, display: L.syllablesDisplay[i]}));
     const shuffled = [...pairs].sort(()=>Math.random()-0.5).slice(0, TOTAL);
@@ -109,8 +123,19 @@ function showQuestion() {
   document.getElementById('progressFill').style.width = `${(current/TOTAL)*100}%`;
   document.getElementById('nextBtn').classList.remove('show');
 
-  // Update math card content
-  if (q.isMath) {
+// Update card content
+  if (q.isVocab) {
+    document.getElementById('vocabCardEmoji').textContent = q.display;
+    document.getElementById('vocabCardHint').textContent = q.hint;
+    document.getElementById('mathCard').style.display = 'none';
+    document.getElementById('soundCard').style.display = 'none';
+    document.getElementById('vocabCard').style.display = '';
+    document.getElementById('answersGrid').className = 'answers-grid answers-grid-vocab';
+    document.getElementById('speechBubble').textContent = LANGS[lang].ui.promptVocab;
+  } else if (q.isMath) {
+    document.getElementById('vocabCard').style.display = 'none';
+    document.getElementById('soundCard').style.display = 'none';
+    document.getElementById('mathCard').style.display = '';
     if (q.isCompare) {
       document.getElementById('mathCardContent').innerHTML =
         `<span class="math-num">${q.leftNum}</span><span class="math-blank">?</span><span class="math-num">${q.rightNum}</span>`;
@@ -120,13 +145,14 @@ function showQuestion() {
         `<div class="math-objects">${q.display}</div>`;
       document.getElementById('answersGrid').className = 'answers-grid';
     }
-    // Update bubble
     document.getElementById('speechBubble').textContent =
       q.isCompare ? u.promptCompare : u.promptCount;
   } else {
+    document.getElementById('vocabCard').style.display = 'none';
+    document.getElementById('mathCard').style.display = 'none';
+    document.getElementById('soundCard').style.display = '';
     document.getElementById('answersGrid').className = 'answers-grid';
     document.getElementById('soundCard').classList.remove('playing');
-    // Update bubble
     document.getElementById('speechBubble').textContent =
       currentGameType === 'syllable' ? L.promptSyllable : L.prompt;
   }
@@ -139,7 +165,8 @@ function showQuestion() {
     btn.className = 'answer-btn';
     btn.textContent = opt.display;
 
-    if (q.isCompare) btn.style.fontSize = '52px';
+if (q.isVocab) btn.style.fontSize = '22px';
+    else if (q.isCompare) btn.style.fontSize = '52px';
     else if (q.isMath) btn.style.fontSize = '38px';
     else btn.style.fontSize = currentGameType === 'syllable' ? '36px' : '50px';
 
