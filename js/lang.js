@@ -49,6 +49,14 @@ function updateAllUI() {
   updateBestScores();
   updateDailyUI();
   updateLangBtns();
+
+  // Subject screen nav labels (sync with menu nav)
+  const sNavMap = [['sNavHome','navHome'],['sNavGallery','navGallery'],['sNavSettings','navSettings']];
+  sNavMap.forEach(([sid, mid]) => {
+    const mel = document.getElementById(mid);
+    const sel = document.getElementById(sid);
+    if (mel && sel) sel.textContent = mel.textContent;
+  });
 }
 
 function setTxt(id, txt) { const el=document.getElementById(id); if(el) el.textContent=txt; }
