@@ -35,6 +35,58 @@ function goStory() {
   generateStory();
 }
 
+function goSubject(key) {
+  currentSubject = key;
+  const subj = SUBJECTS.find(s => s.key === key);
+  const u = LANGS[lang].ui;
+
+  // Title
+  const titleMap = { reading: u.subjectReading, math: u.subjectMath, languages: u.subjectLanguages };
+  document.getElementById('subjectScreenTitle').textContent = titleMap[key] || key;
+
+  // Subject XP bar
+  const sxp = (progress.subjectXP || {})[key] || 0;
+  const slv = getLevel(sxp);
+  document.getElementById('subjectHeaderEmoji').textContent = subj.emoji;
+  document.getElementById('subjectLevelName').textContent = slv.emoji + ' ' + slv.name;
+  document.getElementById('subjectXPText').textContent = `${sxp} XP · ${u.levelLabel} ${slv.num}`;
+  document.getElementById('subjectBarFill').style.width = slv.pct + '%';
+  document.getElementById('subjectBarFill').style.background =
+    `linear-gradient(90deg, ${subj.color}, ${subj.dark})`;
+
+  // Build games grid
+  const grid = document.getElementById('subjectGamesGrid');
+  grid.innerHTML = '';
+  subj.games.forEach(g => {
+    const card = document.createElement('div');
+    card.className = 'game-card' + (g.locked ? ' locked' : '');
+    if (!g.locked) card.onclick = () => startGame(g.type);
+
+    const best = progress.bestScores?.[g.type];
+    const bestTxt = g.locked
+      ? u.comingSoon || '🔒'
+      : (best !== undefined ? `${u.gameBestPre}${best}/${TOTAL}` : '—');
+
+    card.innerHTML = `
+      <div class="game-emoji">${g.emoji}</div>
+      <div class="game-name">${u.subjectGameNames?.[g.type] || g.type}</div>
+      <div class="game-best">${bestTxt}</div>
+      ${g.locked ? '<div class="game-lock">🔒</div>' : ''}
+    `;
+    grid.appendChild(card);
+  });
+
+  // Sync bottom nav labels
+  const navIds = [['sNavHome','navHome'],['sNavGallery','navGallery'],['sNavSettings','navSettings']];
+  navIds.forEach(([sid, mid]) => {
+    const mel = document.getElementById(mid);
+    const sel = document.getElementById(sid);
+    if (mel && sel) sel.textContent = mel.textContent;
+  });
+
+  showScreen('screen-subject');
+}
+
 // ============================================================
 // MENU UI
 // ============================================================
@@ -44,12 +96,12 @@ function updateMenuHeader() {
   const u = LANGS[lang].ui;
   const greeting = profile.name ? `${profile.name}!` : '!';
   document.getElementById('menuGreeting').textContent = greeting;
-
-  const days = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
   const now = new Date();
-  document.getElementById('menuDate').textContent = now.toLocaleDateString(LANGS[lang].lang, {weekday:'long', day:'numeric', month:'long'});
+  document.getElementById('menuDate').textContent = now.toLocaleDateString(
+    LANGS[lang].lang, {weekday:'long', day:'numeric', month:'long'}
+  );
 
-  // Check birthday
+  // Birthday check
   if (profile.birthday) {
     const bd = new Date(profile.birthday);
     if (bd.getDate() === now.getDate() && bd.getMonth() === now.getMonth()) {
@@ -61,17 +113,44 @@ function updateMenuHeader() {
   updateStreak();
   document.getElementById('streakBadge').textContent = `🔥 ${progress.streak}`;
 
-  const bestL = progress.bestScores?.letter;
-  document.getElementById('gcardBest0').textContent = u.gameBestPre + (bestL !== undefined ? `${bestL}/${TOTAL}` : '—');
+  // Global level
+  const xp = progress.xp || 0;
+  const lv = getLevel(xp);
+  document.getElementById('levelEmoji').textContent = lv.emoji;
+  document.getElementById('levelName').textContent = lv.name;
+  document.getElementById('levelNum').textContent = `${u.levelLabel} ${lv.num}`;
+  document.getElementById('levelXP').textContent = `${xp} XP`;
+  document.getElementById('levelBarFill').style.width = lv.pct + '%';
+
+  // Subject cards
+  const grid = document.getElementById('subjectsGrid');
+  grid.innerHTML = '';
+  SUBJECTS.forEach(s => {
+    const sxp = (progress.subjectXP || {})[s.key] || 0;
+    const slv = getLevel(sxp);
+    const name = { reading: u.subjectReading, math: u.subjectMath, languages: u.subjectLanguages }[s.key] || s.key;
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.setProperty('--subj-color', s.color);
+    card.style.setProperty('--subj-dark', s.dark);
+    card.onclick = () => goSubject(s.key);
+    card.innerHTML = `
+      <div class="subject-emoji">${s.emoji}</div>
+      <div class="subject-name">${name}</div>
+      <div class="subject-xp-bar">
+        <div class="subject-xp-fill" style="width:${slv.pct}%;background:${s.color}"></div>
+      </div>
+      <div class="subject-xp-label">${sxp} XP</div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
 function updateStreak() {
   const today = todayKey();
   const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
-  if (progress.lastPlayDate === today) return; // already counted today
-  if (progress.lastPlayDate === yesterday) {
-    // streak continues — will be updated when game is played
-  } else if (progress.lastPlayDate && progress.lastPlayDate !== yesterday) {
+  if (progress.lastPlayDate === today) return;
+  if (progress.lastPlayDate && progress.lastPlayDate !== yesterday) {
     progress.streak = 0;
   }
 }
@@ -89,10 +168,5 @@ function updateDailyUI() {
 }
 
 function updateBestScores() {
-  const u = LANGS[lang].ui;
-  const bestL = progress.bestScores?.letter;
-  const bestS = progress.bestScores?.syllable;
-  document.getElementById('gcardBest0').textContent = u.gameBestPre + (bestL !== undefined ? `${bestL}/${TOTAL}` : '—');
-  const el1 = document.getElementById('gcardBest1');
-  if (el1) el1.textContent = u.gameBestPre + (bestS !== undefined ? `${bestS}/${TOTAL}` : '—');
+  // Best scores are now shown inside subject screen dynamically — no-op here
 }
