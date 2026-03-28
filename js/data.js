@@ -44,6 +44,16 @@ const LANGS = {
       apiNote: 'Бесплатный ключ: console.groq.com → API Keys',
       save: 'Сохранить', saveKey: 'Сохранить ключ', reset: 'Сбросить прогресс',
       noApiKey: 'Добавь Groq API-ключ в Настройках! (бесплатно)',
+      javascriptsubjectReading: 'Чтение',
+subjectMath: 'Математика',
+subjectLanguages: 'Языки',
+levelLabel: 'Уровень',
+comingSoon: 'Скоро!',
+subjectGameNames: {
+  letter:'Какая буква?', syllable:'Какой слог?', word:'Слова',
+  count:'Счёт', compare:'Больше/меньше',
+  vocab:'Словарь', translate:'Перевод',
+  },
     }
   },
   uk: {
@@ -67,6 +77,7 @@ const LANGS = {
     repeatBtn: 'Повтори',
     storyPrompt: (name, age, city) =>
       `Напиши чарівну коротку казку (приблизно 200 слів) українською мовою для дитини на ім'я ${name}, ${age} років${city ? `, з ${city}` : ''}. Головний герой — сам ${name}. У казці є говорючий рудий кіт, який допомагає вчити літери. Казка добра, з хорошим кінцем. Почни з назви казки на окремому рядку.`,
+    
     ui: {
       profileTitle: 'Привіт! Я БукваКіт!',
       profileSub: 'Розкажи мені про себе',
@@ -88,6 +99,16 @@ const LANGS = {
       apiNote: 'Безкоштовний ключ: console.groq.com → API Keys',
       save: 'Зберегти', saveKey: 'Зберегти ключ', reset: 'Скинути прогрес',
       noApiKey: 'Додай Groq API-ключ у Налаштуваннях! (безкоштовно)',
+      subjectReading: 'Читання',
+subjectMath: 'Математика',
+subjectLanguages: 'Мови',
+levelLabel: 'Рівень',
+comingSoon: 'Незабаром!',
+subjectGameNames: {
+  letter:'Яка літера?', syllable:'Який склад?', word:'Слова',
+  count:'Лічба', compare:'Більше/менше',
+  vocab:'Словник', translate:'Переклад'
+},
     }
   },
   en: {
@@ -132,6 +153,16 @@ const LANGS = {
       apiNote: 'Free key at console.groq.com → API Keys',
       save: 'Save', saveKey: 'Save key', reset: 'Reset progress',
       noApiKey: 'Add your free Groq API key in Settings!',
+      subjectReading: 'Reading',
+subjectMath: 'Math',
+subjectLanguages: 'Languages',
+levelLabel: 'Level',
+comingSoon: 'Coming soon!',
+subjectGameNames: {
+  letter:'What letter?', syllable:'What syllable?', word:'Words',
+  count:'Count', compare:'More/Less',
+  vocab:'Vocab', translate:'Translate'
+},
     }
   }
 };
