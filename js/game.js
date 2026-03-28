@@ -143,6 +143,14 @@ function finishGame() {
       progress.lastPlayDate = today;
     }
 
+    // Award XP
+  const xpEarned = gameScore * XP_PER_CORRECT;
+  progress.xp = (progress.xp || 0) + xpEarned;
+  if (!progress.subjectXP) progress.subjectXP = { reading: 0, math: 0, languages: 0 };
+  const subjKey = currentSubject || 'reading';
+  if (progress.subjectXP[subjKey] === undefined) progress.subjectXP[subjKey] = 0;
+  progress.subjectXP[subjKey] += xpEarned;
+
     saveProgress();
     earned.style.display='flex';
     document.getElementById('stickerEarnedIcon').textContent = emoji;
