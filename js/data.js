@@ -58,6 +58,8 @@ taskCount: 'Сколько здесь?',
 taskCompare: 'Что больше?',
 promptCount: 'Посчитай предметы!',
 promptCompare: 'Сравни числа!',
+taskVocab: 'Как это по-английски?',
+promptVocab: 'Найди слово на английском!',
     }
   },
   uk: {
@@ -117,6 +119,8 @@ taskCount: 'Скільки тут?',
 taskCompare: 'Що більше?',
 promptCount: 'Полічи предмети!',
 promptCompare: 'Порівняй числа!',
+taskVocab: 'Як це по-англійськи?',
+promptVocab: 'Знайди слово англійською!',
     }
   },
   en: {
@@ -175,11 +179,46 @@ taskCount: 'How many?',
 taskCompare: 'Which is bigger?',
 promptCount: 'Count the objects!',
 promptCompare: 'Compare the numbers!',
+taskVocab: 'What is this in English?',
+promptVocab: 'Find the English word!',
     }
   }
 };
 
 const STICKER_EMOJIS = ['⭐','🌟','🏆','🎉','🌈','🦋','🌸','🐾','💎','🎀','🍀','🔥','💫','🎵','🌙','🎨','🦄','🍭','🎈','🌺','💖','🎯','🚀','🎠'];
+
+const VOCAB_WORDS = [
+  { emoji:'🐱', en:'cat',    ru:'кот',     uk:'кіт'      },
+  { emoji:'🐶', en:'dog',    ru:'собака',  uk:'собака'   },
+  { emoji:'🐸', en:'frog',   ru:'лягушка', uk:'жаба'     },
+  { emoji:'🦋', en:'butterfly', ru:'бабочка', uk:'метелик'},
+  { emoji:'🍎', en:'apple',  ru:'яблоко',  uk:'яблуко'   },
+  { emoji:'🍌', en:'banana', ru:'банан',   uk:'банан'    },
+  { emoji:'🚗', en:'car',    ru:'машина',  uk:'машина'   },
+  { emoji:'🏠', en:'house',  ru:'дом',     uk:'будинок'  },
+  { emoji:'🌸', en:'flower', ru:'цветок',  uk:'квітка'   },
+  { emoji:'☀️', en:'sun',    ru:'солнце',  uk:'сонце'    },
+  { emoji:'🌙', en:'moon',   ru:'луна',    uk:'місяць'   },
+  { emoji:'⭐', en:'star',   ru:'звезда',  uk:'зірка'    },
+  { emoji:'🎈', en:'balloon',ru:'шарик',   uk:'кулька'   },
+  { emoji:'📚', en:'book',   ru:'книга',   uk:'книга'    },
+  { emoji:'✏️', en:'pencil', ru:'карандаш',uk:'олівець'  },
+  { emoji:'🎵', en:'music',  ru:'музыка',  uk:'музика'   },
+  { emoji:'🚀', en:'rocket', ru:'ракета',  uk:'ракета'   },
+  { emoji:'🌈', en:'rainbow',ru:'радуга',  uk:'веселка'  },
+  { emoji:'🐠', en:'fish',   ru:'рыба',    uk:'риба'     },
+  { emoji:'🦁', en:'lion',   ru:'лев',     uk:'лев'      },
+  { emoji:'🐘', en:'elephant',ru:'слон',   uk:'слон'     },
+  { emoji:'🍕', en:'pizza',  ru:'пицца',   uk:'піца'     },
+  { emoji:'🎂', en:'cake',   ru:'торт',    uk:'торт'     },
+  { emoji:'⚽', en:'ball',   ru:'мяч',     uk:'м\'яч'    },
+  { emoji:'🎨', en:'art',    ru:'рисунок', uk:'малюнок'  },
+  { emoji:'🌊', en:'wave',   ru:'волна',   uk:'хвиля'    },
+  { emoji:'🦅', en:'eagle',  ru:'орёл',    uk:'орел'     },
+  { emoji:'🍦', en:'ice cream',ru:'мороженое',uk:'морозиво'},
+  { emoji:'🚂', en:'train',  ru:'поезд',   uk:'потяг'    },
+  { emoji:'🌺', en:'rose',   ru:'роза',    uk:'троянда'  },
+];
 
 const SUBJECTS = [
   {
@@ -200,7 +239,7 @@ const SUBJECTS = [
   {
     key: 'languages', emoji: '🌍', color: '#A855F7', dark: '#7e22ce',
     games: [
-      { type: 'vocab',     emoji: '🖼️', locked: true },
+      { type: 'vocab',     emoji: '🖼️', locked: false },
       { type: 'translate', emoji: '🔤', locked: true },
     ]
   },
