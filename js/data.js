@@ -44,7 +44,7 @@ const LANGS = {
       apiNote: 'Бесплатный ключ: console.groq.com → API Keys',
       save: 'Сохранить', saveKey: 'Сохранить ключ', reset: 'Сбросить прогресс',
       noApiKey: 'Добавь Groq API-ключ в Настройках! (бесплатно)',
-      javascriptsubjectReading: 'Чтение',
+subjectReading: 'Чтение',
 subjectMath: 'Математика',
 subjectLanguages: 'Языки',
 levelLabel: 'Уровень',
