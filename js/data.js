@@ -137,3 +137,28 @@ const LANGS = {
 };
 
 const STICKER_EMOJIS = ['⭐','🌟','🏆','🎉','🌈','🦋','🌸','🐾','💎','🎀','🍀','🔥','💫','🎵','🌙','🎨','🦄','🍭','🎈','🌺','💖','🎯','🚀','🎠'];
+
+const SUBJECTS = [
+  {
+    key: 'reading', emoji: '📚', color: '#FF6B35', dark: '#c04a1a',
+    games: [
+      { type: 'letter',   emoji: '👂', locked: false },
+      { type: 'syllable', emoji: '🧩', locked: false },
+      { type: 'word',     emoji: '🚂', locked: true  },
+    ]
+  },
+  {
+    key: 'math', emoji: '🔢', color: '#4ECDC4', dark: '#0f766e',
+    games: [
+      { type: 'count',   emoji: '🔢', locked: true },
+      { type: 'compare', emoji: '⚖️', locked: true },
+    ]
+  },
+  {
+    key: 'languages', emoji: '🌍', color: '#A855F7', dark: '#7e22ce',
+    games: [
+      { type: 'vocab',     emoji: '🖼️', locked: true },
+      { type: 'translate', emoji: '🔤', locked: true },
+    ]
+  },
+];
