@@ -105,29 +105,22 @@
     <button class="lang-btn" id="mlang-en" onclick="setLang('en')">🇬🇧</button>
   </div>
 
-  <div class="section-title" id="menuSectionGames">🎮 Игры</div>
-  <div class="games-grid">
-    <div class="game-card" onclick="startGame('letter')" id="card-letter">
-      <div class="game-emoji">👂</div>
-      <div class="game-name" id="gcardName0">Какая буква?</div>
-      <div class="game-best" id="gcardBest0">Лучший: —</div>
+<!-- Level section -->
+  <div class="level-section">
+    <div class="level-badge-row">
+      <span id="levelEmoji" style="font-size:32px;">🐣</span>
+      <div class="level-info">
+        <span id="levelName">Птенец</span>
+        <span id="levelNum" class="level-num">Уровень 1</span>
+      </div>
+      <span id="levelXP" class="level-xp">0 XP</span>
     </div>
-    <div class="game-card" onclick="startGame('syllable')" id="card-syllable">
-      <div class="game-emoji">🧩</div>
-      <div class="game-name" id="gcardName1">Слоги</div>
-      <div class="game-best" id="gcardBest1">Лучший: —</div>
-    </div>
-    <div class="game-card locked" id="card-word">
-      <div class="game-emoji">🚂</div>
-      <div class="game-name" id="gcardName2">Слова</div>
-      <div class="game-lock">🔒</div>
-    </div>
-    <div class="game-card locked" id="card-memory">
-      <div class="game-emoji">🃏</div>
-      <div class="game-name" id="gcardName3">Мемори</div>
-      <div class="game-lock">🔒</div>
-    </div>
+    <div class="level-bar"><div class="level-bar-fill" id="levelBarFill" style="width:0%"></div></div>
   </div>
+
+  <!-- Subjects -->
+  <div class="section-title" id="menuSectionGames">📖 Направления</div>
+  <div class="subjects-grid" id="subjectsGrid"></div>
 
   <div class="bottom-nav">
     <button class="nav-btn active" onclick="goMenu()"><span class="nav-icon">🏠</span><span id="navHome">Главная</span></button>
@@ -237,6 +230,35 @@
       <div class="prize-locked" id="prizeLocked">⭐ Ещё нужно: <span id="prizeNeed">3</span></div>
       <button class="btn btn-accent" id="btnGetStory" onclick="goStory()" style="display:none; margin-top:10px; width:100%;">Получить сказку! ✨</button>
     </div>
+  </div>
+</div>
+
+  <!-- ======== SUBJECT SCREEN ======== -->
+<div class="screen" id="screen-subject">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goMenu()">←</button>
+    <div class="top-title" id="subjectScreenTitle">Чтение</div>
+  </div>
+
+  <div class="subject-xp-section">
+    <div class="subject-level-row">
+      <span id="subjectHeaderEmoji" style="font-size:28px;">📚</span>
+      <div style="flex:1">
+        <div id="subjectLevelName" style="font-size:15px;font-weight:900;color:#1e293b;"></div>
+        <div id="subjectXPText" style="font-size:12px;font-weight:700;color:#94a3b8;"></div>
+      </div>
+    </div>
+    <div class="level-bar">
+      <div class="level-bar-fill" id="subjectBarFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="games-grid" id="subjectGamesGrid" style="padding:0 16px 16px;"></div>
+
+  <div class="bottom-nav" style="margin-top:auto;">
+    <button class="nav-btn" onclick="goMenu()"><span class="nav-icon">🏠</span><span id="sNavHome">Главная</span></button>
+    <button class="nav-btn" onclick="goGallery()"><span class="nav-icon">🏆</span><span id="sNavGallery">Наклейки</span></button>
+    <button class="nav-btn" onclick="goSettings()"><span class="nav-icon">⚙️</span><span id="sNavSettings">Настройки</span></button>
   </div>
 </div>
 
